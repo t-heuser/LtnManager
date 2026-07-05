@@ -1,5 +1,6 @@
 local gui = require("lib.gui")
 local format = require("__flib__.format")
+local stdutil = require("__core__.lualib.util")
 
 local util = {}
 
@@ -9,6 +10,15 @@ local util = {}
 function util.error_flying_text(player, message)
   player.create_local_flying_text({ create_at_cursor = true, text = message })
   player.play_sound({ path = "utility/cannot_build" })
+end
+
+function util.split_string(inputstr, sep)
+  sep = sep or "%s" -- Defaults to whitespace if no separator is given
+  local t = {}
+  for str in string.gmatch(inputstr, "([^" .. sep .. "]+)") do
+    table.insert(t, str)
+  end
+  return t
 end
 
 function util.gui_list(parent, iterator, test, build, update, ...)
@@ -53,12 +63,14 @@ function util.slot_table_update(table, sources)
   for _, source_data in pairs(sources) do
     if source_data.entries then
       for name, count in pairs(source_data.entries) do
-        local sprite
+        local sprite, quality
         if source_data.type then
           sprite = source_data.type .. "/" .. name
         else
-          name = string.match(name, "^[^,]+,[^,]+") or name -- remove quality info
-          sprite = string.gsub(name, ",", "/")
+          local item_data = stdutil.split(name, ",")
+          name = item_data[1] .. "," .. item_data[2]
+          sprite = string.gsub(name, ",", "/") -- remove quality info
+          quality = item_data[3]
         end
         if helpers.is_valid_sprite_path(sprite) then
           i = i + 1
@@ -68,6 +80,7 @@ function util.slot_table_update(table, sources)
           end
           button.style = "ltnm_small_slot_button_" .. source_data.color
           button.sprite = sprite
+          button.quality = quality
           local translations = source_data.translations or {}
           button.tooltip = "[img="
             .. sprite

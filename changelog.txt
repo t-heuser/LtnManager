@@ -1,4 +1,10 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.5.3
+Date: 2026-07-05
+  Changes:
+    - Added quality icons to the various gui elements.
+    - Prevent a crash when indexing a station that does not have any signals defined.
+---------------------------------------------------------------------------------------------------
 Version: 0.5.2
 Date: 2026-06-14
   Changes:

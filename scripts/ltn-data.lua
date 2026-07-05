@@ -301,6 +301,7 @@ local function iterate_stations(working_data, iterations_per_tick)
     for _, signal in
       ipairs(
         station_data.input.get_signals(defines.wire_connector_id.circuit_red, defines.wire_connector_id.circuit_green)
+          or {}
       )
     do
       local id = signal.signal

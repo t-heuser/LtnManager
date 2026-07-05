@@ -61,7 +61,7 @@ local function update_table(self, name, color)
       if running_count > 0 then
         lua_table.insert(items, {
           name = name,
-          running_count = running_count
+          running_count = running_count,
         })
       end
     end
@@ -79,10 +79,11 @@ local function update_table(self, name, color)
       button = table.add({ type = "sprite-button", style = "ltnm_slot_button_" .. color })
     end
 
-    local item_name = string.match(item.name, "^[^,]+,[^,]+") or item.name -- remove quality info
+    local item_data = util.split(item.name, ",")
+    item_name = item_data[1] .. "," .. item_data[2]
     local item_sprite = string.gsub(item_name, ",", "/")
-
     button.sprite = item_sprite
+    button.quality = item_data[3]
     button.number = item.running_count
     button.tooltip = "[img="
       .. item_sprite

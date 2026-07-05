@@ -1,11 +1,11 @@
 {
   "name": "LtnManager",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "title": "LTN Manager",
   "author": "nihilistzsche",
-  "contact": "Discord: nihilistzsche#0420",
+  "contact": "Discord: nihilistzsche",
   "homepage": "https://github.com/nihilistzsche/LtnManager",
   "description": "A GUI for managing your Logistic Train Network.",
   "factorio_version": "2.0",
-  "dependencies": ["base >= 2.0.32", "LogisticTrainNetwork >= 2.0.0", "flib >= 0.15.0", "? LTN_Combinator_Modernized", "? nullius"]
+  "dependencies": ["base >= 2.0.48", "LogisticTrainNetwork >= 2.0.0", "flib >= 0.15.0", "? LTN_Combinator_Modernized", "? nullius"]
 }
